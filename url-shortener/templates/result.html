@@ -3,33 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your short link - Shortly</title>
+  <title>Your short link - Snip</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
   <main class="card">
-    <p class="success">✓ Link shortened</p>
+    <div class="status-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M8.5 12.5l2.5 2.5 5-5" />
+      </svg>
+      <span>Link ready</span>
+    </div>
 
     <div class="result-box">
       <span id="short-url">{{ short_url }}</span>
-      <button id="copy-btn" onclick="copyLink()">Copy</button>
+      <button class="icon-btn" id="copy-btn" onclick="copyLink()" aria-label="Copy link">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="12" height="12" rx="2" />
+          <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" />
+        </svg>
+      </button>
     </div>
 
     <p class="original-url">Original: {{ original_url }}</p>
-    <p class="clicks">{{ clicks }} clicks</p>
 
-    <a class="back-link" href="/">Shorten another link</a>
+    <div class="meta-row">
+      <div class="meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 3" />
+        </svg>
+        <span>Created just now</span>
+      </div>
+      <div class="meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20V10M12 20V4M20 20v-7" />
+        </svg>
+        <span>{{ clicks }} clicks</span>
+      </div>
+    </div>
+
+    <a class="back-link" href="/">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7" />
+      </svg>
+      Shorten another link
+    </a>
   </main>
 
+  <!--JavaScript-->
   <script>
     function copyLink() {
       const text = document.getElementById("short-url").textContent;
       navigator.clipboard.writeText(text).then(function () {
         const btn = document.getElementById("copy-btn");
-        const original = btn.textContent;
-        btn.textContent = "Copied";
+        btn.style.borderColor = "#7bc67e";
         setTimeout(function () {
-          btn.textContent = original;
+          btn.style.borderColor = "";
         }, 1200);
       });
     }
