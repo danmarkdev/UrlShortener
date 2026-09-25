@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your short link - Shortly</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <main class="card">
+    <p class="success">✓ Link shortened</p>
+
+    <div class="result-box">
+      <span id="short-url">{{ short_url }}</span>
+      <button id="copy-btn" onclick="copyLink()">Copy</button>
+    </div>
+
+    <p class="original-url">Original: {{ original_url }}</p>
+    <p class="clicks">{{ clicks }} clicks</p>
+
+    <a class="back-link" href="/">Shorten another link</a>
+  </main>
+
+  <!--JavaScript-->
+  <script>
+    function copyLink() {
+      const text = document.getElementById("short-url").textContent;
+      navigator.clipboard.writeText(text).then(function () {
+        const btn = document.getElementById("copy-btn");
+        const original = btn.textContent;
+        btn.textContent = "Copied";
+        setTimeout(function () {
+          btn.textContent = original;
+        }, 1200);
+      });
+    }
+  </script>
+</body>
+</html>
