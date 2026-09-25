@@ -3,16 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shortly - URL Shortener</title>
+  <title>URL Shortener</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
   <main class="card">
-    <div class="brand">
-      <span class="brand-icon">🔗</span>
-      <span class="brand-name">shortly</span>
+    <div class="header-row">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07l-1.5 1.5" />
+            <path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07l1.5-1.5" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <p class="brand-name">Snip</p>
+          <p class="brand-tagline">Turn long links into short ones</p>
+        </div>
+      </div>
+      <span class="badge">Free</span>
     </div>
-    <p class="subtitle">Paste a link, get a short one back.</p>
 
     <form action="/shorten" method="POST">
       <input
